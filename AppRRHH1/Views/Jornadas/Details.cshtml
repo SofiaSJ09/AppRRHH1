@@ -1,0 +1,108 @@
+﻿@model AppRRHH1.Models.Empleado
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1 class="text-center">Jornadas de trabajo de: @Html.DisplayFor(model => model.Nombre)  @Html.DisplayFor(model => model.Apellidos) </h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PuestoTrabajo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PuestoTrabajo.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PuestoTrabajo.PagoHora)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PuestoTrabajo.PagoHora)
+        </dd>
+    </dl>
+    <p class="text-end">
+        <a asp-action="Create" asp-route-id="@Model.EmpleadoId" class="btn btn-success" > <i class="bi bi-plus-circle"> Agregar jornada</i></a>
+    </p>
+    <p class="text-end">
+        <a asp-action="ExportarEmpleadosJornadasAExcel" asp-route-id="@Model.EmpleadoId" class="btn btn-primary" > <i class="bi bi-file-spreadsheet-fill"> Exportar Excel  </i></a>
+    </p>
+</div>
+ <hr/>
+<table class="table" id="tblJornada">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Fecha de inicio
+            </th>
+            <th>
+                Fecha de Fin
+            </th>
+            <th>
+                Horas trabajadas
+            </th>
+
+            <th>
+                Salario
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Jornada)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasTrabajadas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalarioBruto)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.JornadaId" class="btn btn-warning"> <i class="bi bi-pencil-fill"> Editar</i> </a> |
+                    <a asp-action="Delete" asp-route-id="@item.JornadaId" class="btn btn-danger"><i class="bi bi-x-circle-fill"> Borrar</i> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div
+
+@section scripts {
+    <script>
+        let table = new DataTable('#tblJornada', {
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "width": "100%"
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AppRRHH1.Models.Empleado>
+@{
+    ViewData["Title"] = "Jornadas";
+}
+<h1 class="text-center">Lista de empleados y sus jornadas</h1>
+<p class="text-end">
+    <a asp-action="ExportarEmpleadosAExcel" class="btn btn-success"><i class="bi bi-file-spreadsheet-fill"> Exportar Excel lista</i></a>
+    </>
+
+    <table class="table" id="tblJornada">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PuestoTrabajo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PuestoTrabajo.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.EmpleadoId" class="btn btn-secondary"><i class="bi bi-info-circle-fill"> Ver</i></a> |
+                        <a asp-action="Create" asp-route-id="@item.EmpleadoId" class="btn btn-success"><i class="bi bi-plus-circle"> Agregar jornada</i> </a>
+                        <a asp-action="ExportarEmpleadosJornadasAExcel" asp-route-id="@item.EmpleadoId" class="btn btn-primary">
+                            <i class="bi bi-file-spreadsheet-fill"> Exportar Excel jornadas </i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section scripts {
+        <script>
+            let table = new DataTable('#tblJornada', {
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "No hay registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "width": "100%"
+            });
+        </script>
+    }

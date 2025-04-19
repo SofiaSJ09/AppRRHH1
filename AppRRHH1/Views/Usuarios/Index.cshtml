@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Usuarios";
+}
+<li class="nav-item">
+    <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">
+        Crear
+        Nuevo Usuario
+    </a>
+</li>
+<h1 class="text-center">Bloquear o desbloquear usuarios</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card border">
+            <div class="card-header">
+                <h3><strong>Lista de usuarios</strong></h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table">
+                @if (Model.Count() > 0)
+                {
+                    <table class="table table-bordered" id="tablaContactos" width="100%"
+                           cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.UserName)</th>
+                                <th>Bloquear/Desbloquear</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.UserName)</td>
+                                    <td>
+                                        @if (item.LockoutEnd == null || item.LockoutEnd <
+                                       DateTime.Now)
+                                        {
+                                            <a class="btn btn-danger" asp-action="Bloquear"
+                                               asp-route-id="@item.Id"><i class="bi bi-lock-fill"></i> Bloquear</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success" aspaction="Desbloquear" asp-route-id="@item.Id"><i class="bi bi-unlock-fill"></i> Desbloquear</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No hay registros</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

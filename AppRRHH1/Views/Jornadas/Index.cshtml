@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AppRRHH1.Models.Jornada>
+
+@{
+    ViewData["Title"] = "Jornadas";
+}
+
+<h1>Jornadas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear nueva jornada</a>
+</p>
+<table class="table" id="tblJornada">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorasTrabajadas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalarioBruto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empleado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasTrabajadas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalarioBruto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.EmpleadoId)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.JornadaId" class="btn btn-warning"> <i class="bi bi-pencil-fill"> Editar</i> </a> |
+                    <a asp-action="Details" asp-route-id="@item.JornadaId" class="btn btn-secondary"> <i class="bi bi-info-circle-fill">Detalle</i> </a>
+                    <a asp-action="Delete" asp-route-id="@item.JornadaId" class="btn btn-danger"> <i class="bi bi-x-circle-fill"> Eliminar</i> </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        let table = new DataTable('#tblJornadas', {
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "width": "100%"
+        });
+    </script>
+}

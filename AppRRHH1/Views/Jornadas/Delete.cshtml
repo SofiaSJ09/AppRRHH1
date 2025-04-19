@@ -1,0 +1,43 @@
+﻿@model AppRRHH1.Models.Jornada
+@{
+    ViewData["Title"] = "Delete";
+}
+<h4 class="text-center">Editando la jornada de: @Html.DisplayFor(model => model.Empleado.Nombre) @Html.DisplayFor(model => model.Empleado.Apellidos)</h4>
+<h4 class="text-center">Puesto: @Html.DisplayFor(model => model.Empleado.PuestoTrabajo.Nombre) Pago Hora: @Html.DisplayFor(model => model.Empleado.PuestoTrabajo.PagoHora) </h4>
+
+<h3>Esta seguro de eliminar esta jornada?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HorasTrabajadas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HorasTrabajadas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SalarioBruto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SalarioBruto)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="JornadaId" />
+        <input type="submit" value="Sí, borrar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AppRRHH1.Models.Departamento>
+
+@{
+    ViewData["Title"] = "Departamentos";
+}
+
+<h1>Lista de departamentos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"> Crear nuevo departamento</i></a>
+</p>
+<table class="table" id="tblDepartamento">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.DepartamentoId" class="btn btn-warning"> <i class="bi bi-pencil-fill"> Editar</i> </a> |
+                    <a asp-action="Details" asp-route-id="@item.DepartamentoId" class="btn btn-secondary"> <i class="bi bi-info-circle-fill">Detalle</i> </a>
+                    <a asp-action="Delete" asp-route-id="@item.DepartamentoId" class="btn btn-danger"> <i class="bi bi-x-circle-fill"> Eliminar</i> </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        let table = new DataTable('#tblDepartamento', {
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay registros",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "width": "100%"
+        });
+    </script>
+}
